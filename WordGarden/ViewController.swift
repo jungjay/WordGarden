@@ -19,15 +19,30 @@ class ViewController: UIViewController {
     @IBOutlet weak var gameStatusMessageLabel: UILabel!
     @IBOutlet weak var flowerImageView: UIImageView!
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let text = guessedLetterTextField.text!
+        guessLetterButton.isEnabled = !(text.isEmpty)
     }
-
+    func updateUIAfterGuess() {
+        guessedLetterTextField.resignFirstResponder()
+        guessedLetterTextField.text! = ""
+        guessLetterButton.isEnabled = false
+    }
+    
+    @IBAction func doneKeyPressed(_ sender: UITextField) {
+        // this dismisses the keyboard
+        updateUIAfterGuess()
+    }
+    
+    @IBAction func guessedLetterFieldChanged(_ sender: UITextField) {
+        let text = guessedLetterTextField.text!
+        guessLetterButton.isEnabled = !(text.isEmpty)
+    }
+    
     @IBAction func guessLetterButtonPressed(_ sender: UIButton) {
+        // this dismisses the keyboard
+        updateUIAfterGuess()
     }
     
     @IBAction func playAgainButtonPressed(_ sender: UIButton) {
